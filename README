@@ -1,0 +1,80 @@
+# SQL Injection Practice Lab — "Free Starbucks Coffee" Login (Python)
+
+A small, intentionally vulnerable web app for teaching classic SQL-injection
+login bypass. Built with Python, Flask, and an in-memory SQLite database.
+
+## ⚠️ For learning only
+This app is deliberately insecure. Run it only on your own machine for
+practice — never deploy it to the internet.
+
+## Setup
+
+```powershell
+cd sqli-coffee-lab-python
+pip install -r requirements.txt
+python app.py
+```
+
+Then open **http://localhost:5000** in a browser.
+
+(If `python` doesn't work on your system, try `python3 app.py` instead.)
+
+## The challenge
+
+Page title: **"Enjoy Starbucks Coffee Free"**
+
+Students don't know the real admin password. The goal is to log in anyway,
+using SQL injection instead of a valid credential.
+
+The backend builds the query like this (in `app.py`):
+
+```python
+query = f"SELECT * FROM users WHERE username = '{username}' AND password = '{password}'"
+```
+
+Because the input is pasted straight into the SQL string, entering SQL
+syntax changes the meaning of the query.
+
+### Example bypass payloads
+
+Username field:
+```
+' OR '1'='1' --
+```
+Password field: anything (or leave blank)
+
+This turns the query into:
+```sql
+SELECT * FROM users WHERE username = '' OR '1'='1' --' AND password = '...'
+```
+`'1'='1'` is always true, and `--` comments out the rest of the line, so the
+query returns the admin row without knowing the real password.
+
+Other payloads that also work:
+- Username: `admin' --`
+- Password: `' OR '1'='1`
+
+### What happens on success
+The student is shown `admin.html` — a page that congratulates them and shows
+a "FREE STARBUCKS COFFEE" message. No flag/token — just the success page.
+
+## How to fix it (for the lesson's second half)
+
+Show students the secure version, using a **parameterized query** instead of
+an f-string:
+
+```python
+query = "SELECT * FROM users WHERE username = ? AND password = ?"
+cursor = db.execute(query, (username, password))
+```
+
+With parameterized queries, user input is always treated as *data*, never as
+executable SQL, so the same injection payloads just fail to match any user.
+
+Other good talking points:
+- Always use parameterized queries / prepared statements or an ORM.
+- Never build SQL with f-strings/`%`/`.format()` using user input.
+- Hash passwords (e.g. with `werkzeug.security` or `bcrypt`) instead of
+  storing them in plain text.
+- Apply least-privilege database accounts and input validation as
+  defense-in-depth (not a substitute for parameterized queries).
