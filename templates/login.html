@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Enjoy Starbucks Coffee Free</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #F5E9DA;
+  }
+
+  /* ---------- LEFT PANEL ---------- */
+  .left {
+    flex: 1;
+    background: linear-gradient(160deg, #003c26, #00704A 60%, #0a5c3e);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    min-width: 320px;
+  }
+  .left::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,0.05) 2px, transparent 2px);
+    background-size: 34px 34px;
+    animation: drift 45s linear infinite;
+  }
+  @keyframes drift {
+    from { background-position: 0 0; }
+    to { background-position: 400px 400px; }
+  }
+
+  .scene { position: relative; z-index: 1; text-align: center; }
+
+  .steam { position: relative; width: 90px; height: 40px; margin: 0 auto -10px; }
+  .steam span {
+    position: absolute; bottom: 0; width: 9px; height: 28px;
+    background: rgba(255,255,255,0.4); border-radius: 8px;
+    animation: rise 2.6s ease-in-out infinite; filter: blur(1px);
+  }
+  .steam span:nth-child(1) { left: 14px;  animation-delay: 0s; }
+  .steam span:nth-child(2) { left: 40px;  animation-delay: 0.5s; }
+  .steam span:nth-child(3) { left: 66px;  animation-delay: 1s; }
+  @keyframes rise {
+    0%   { transform: translateY(0) scaleY(1);       opacity: 0.6; }
+    55%  { transform: translateY(-22px) scaleY(1.35); opacity: 0.15; }
+    100% { transform: translateY(-34px) scaleY(1);    opacity: 0; }
+  }
+
+  .cup {
+    width: 130px; height: 110px;
+    background: linear-gradient(180deg, #ffffff, #f0ece4);
+    border-radius: 0 0 46px 46px;
+    position: relative;
+    margin: 0 auto;
+    box-shadow: 0 14px 30px rgba(0,0,0,0.35);
+  }
+  .cup::before { /* coffee liquid rim */
+    content: "";
+    position: absolute;
+    top: -10px; left: -6px; right: -6px;
+    height: 20px;
+    background: #3c2415;
+    border-radius: 50%;
+    border: 5px solid #ffffff;
+  }
+  .cup::after { /* handle */
+    content: "";
+    position: absolute;
+    right: -34px; top: 24px;
+    width: 36px; height: 44px;
+    border: 10px solid #ffffff;
+    border-left: none;
+    border-radius: 0 24px 24px 0;
+  }
+  .saucer {
+    width: 190px; height: 18px;
+    background: #ffffff;
+    border-radius: 50%;
+    margin: 6px auto 0;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  }
+
+  .badge {
+    margin-top: 46px;
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1.5px solid rgba(255,255,255,0.5);
+    border-radius: 999px;
+    color: #fff;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    background: rgba(255,255,255,0.08);
+  }
+  .left h2 {
+    color: #fff;
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: 600;
+  }
+  .left p {
+    color: rgba(255,255,255,0.75);
+    font-size: 13.5px;
+    margin-top: 8px;
+    max-width: 260px;
+    margin-left: auto; margin-right: auto;
+    line-height: 1.5;
+  }
+
+  /* ---------- RIGHT PANEL ---------- */
+  .right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    min-width: 320px;
+  }
+  .form-card { width: 320px; }
+
+  .form-card h1 {
+    font-size: 22px;
+    color: #1e3932;
+    margin-bottom: 4px;
+  }
+  .form-card p.sub {
+    color: #888;
+    font-size: 13px;
+    margin-bottom: 26px;
+  }
+
+  input {
+    width: 100%;
+    padding: 13px 14px;
+    margin-bottom: 13px;
+    border: 1px solid #d9d9d9;
+    border-radius: 10px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  input:focus { border-color: #00704A; }
+
+  button {
+    width: 100%;
+    padding: 14px;
+    background: #00704A;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+  }
+  button:hover { background: #005c3c; }
+  button:active { transform: scale(0.98); }
+
+  #msg { margin-top: 14px; font-size: 13px; color: #c0392b; min-height: 16px; }
+
+  /* ---------- MOBILE ---------- */
+  @media (max-width: 760px) {
+    body { flex-direction: column; }
+    .left { min-height: 300px; padding: 30px 0; }
+    .right { padding: 40px 0; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="left">
+    <div class="scene">
+      <div class="steam"><span></span><span></span><span></span></div>
+      <div class="cup"></div>
+      <div class="saucer"></div>
+      <div class="badge">☕ Free Coffee Reward</div>
+      <h2>Enjoy Starbucks Coffee Free</h2>
+      <p>Login to your account and claim a free coffee on us.</p>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="form-card">
+      <h1>Welcome back</h1>
+      <p class="sub">Sign in to continue</p>
+
+      <form method="POST" action="/login">
+        <input type="text" name="username" placeholder="Username" autocomplete="off" />
+        <input type="password" name="password" placeholder="Password" autocomplete="off" />
+        <button type="submit">Login</button>
+      </form>
+      {% if error %}
+        <div id="msg">{{ error }}</div>
+      {% endif %}
+    </div>
+  </div>
+
+</body>
+</html>
