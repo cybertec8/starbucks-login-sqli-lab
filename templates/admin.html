@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Welcome, Admin!</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f5e9da, #d9c7a3);
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+  }
+  .card {
+    background: #fff;
+    padding: 44px 38px;
+    border-radius: 14px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+    width: 380px;
+    text-align: center;
+  }
+  .cup { font-size: 54px; margin-bottom: 10px; }
+  h1 { color: #00704A; margin: 0 0 8px; font-size: 22px; }
+  p { color: #444; font-size: 14px; line-height: 1.5; }
+  .coupon {
+    margin-top: 18px;
+    padding: 14px;
+    border: 2px dashed #00704A;
+    border-radius: 10px;
+    background: #f4fbf7;
+    font-weight: 600;
+    color: #00704A;
+    letter-spacing: 1px;
+  }
+  a.back {
+    display: inline-block;
+    margin-top: 22px;
+    font-size: 13px;
+    color: #888;
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="cup">☕🎉</div>
+    <h1>You bypassed the login!</h1>
+    <p>Nicely done — you got into the admin area using a SQL injection
+       payload instead of a real password. Here's your reward:</p>
+    <div class="coupon">FREE STARBUCKS COFFEE</div>
+    <a class="back" href="/login">&larr; back to login</a>
+  </div>
+</body>
+</html>
